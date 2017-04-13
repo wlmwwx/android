@@ -94,9 +94,10 @@ android {
             }
 
             gplay {
-                applicationId 'com.nextcloud.client'
+                applicationId 'com.nextcloud.android.dev'
                 dimension "default"
             }
+
 
             modified {
                 // structure is:
