@@ -98,7 +98,7 @@
     <bool name="imprint_enabled">false</bool>
     <bool name="recommend_enabled">true</bool>
     <bool name="feedback_enabled">true</bool>
-    <bool name="logger_enabled">false</bool>
+    <bool name="logger_enabled">true</bool>
     <bool name="sourcecode_enabled">true</bool>
     <string name="sourcecode_url" translatable="false">https://github.com/nextcloud/android</string>
     <bool name="license_enabled">true</bool>
@@ -116,7 +116,7 @@
     <string name="syncedFolder_light_upload_behaviour">FileUploader.LOCAL_BEHAVIOUR_FORGET</string>
 
     <!--Destination mail for sending log files -->
-    <string name="mail_logger"></string>
+    <string name="mail_logger">android@nextcloud.com</string>
 
     <!-- Determine is participate enabled -->
     <bool name="participate_enabled">true</bool>
