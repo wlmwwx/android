@@ -26,17 +26,19 @@
             android:title="@string/prefs_storage_path"
             android:key="storage_path"/>
 	</PreferenceCategory>
-	<PreferenceCategory
-		android:title="@string/drawer_synced_folders"
-		android:key="synced_folders_category">
+
+    <PreferenceCategory 
+	                        android:title="@string/drawer_synced_folders"
+							android:key="synced_folders_category" >
 		<com.owncloud.android.ui.ThemeableSwitchPreference
-			android:title="@string/auto_upload_on_wifi"
-			android:key="synced_folder_on_wifi"/>
-        <Preference
-			android:title="@string/synced_folders_configure_folders"
-			android:id="@+id/synced_folders_configure_folders"
+							android:title="@string/auto_upload_on_wifi"
+							android:key="synced_folder_on_wifi" />
+	    <Preference
+	        android:title="@string/synced_folders_configure_folders"
+	        android:id="@+id/synced_folders_configure_folders"
 			android:key="synced_folders_configure_folders"/>
-	</PreferenceCategory>
+                        
+    </PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/prefs_category_details" android:key="details">
 		<com.owncloud.android.ui.ThemeableSwitchPreference
@@ -81,6 +83,16 @@
 			android:id="@+id/license"
 			android:key="license"/>
 		<Preference android:title="@string/about_title" android:id="@+id/about_app" android:key="about_app" />
+	</PreferenceCategory>
+
+	<PreferenceCategory android:title="@string/prefs_category_dev" android:key="dev_category">
+		<Preference android:id="@+id/dev_link"
+					android:title="Download latest dev version"
+					android:key="dev_link" />
+
+		<Preference android:id="@+id/changelog_link"
+					android:title="Changelog dev version"
+					android:key="changelog_link" />
 	</PreferenceCategory>
 
 </PreferenceScreen>
