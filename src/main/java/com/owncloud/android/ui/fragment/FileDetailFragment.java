@@ -292,9 +292,11 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
             item.setEnabled(false);
         }
 
+        item = menu.findItem(R.id.action_share_file);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
         if(getFile().isSharedWithMe() && !getFile().canReshare()){
             // additional restriction for this fragment
-            item = menu.findItem(R.id.action_share_file);
             if(item != null){
                 item.setVisible(false);
                 item.setEnabled(false);
@@ -473,14 +475,6 @@ public class FileDetailFragment extends FileFragment implements OnClickListener,
      * @param file : An {@link OCFile}
      */
     private void setFiletype(OCFile file) {
-        String mimetype = file.getMimetype();
-        TextView tv = (TextView) getView().findViewById(R.id.fdType);
-        if (tv != null) {
-			// mimetype      MIME type to set
-            String printableMimetype = DisplayUtils.convertMIMEtoPrettyPrint(mimetype);
-            tv.setText(printableMimetype);
-        }
-
         ImageView iv = (ImageView) getView().findViewById(R.id.fdIcon);
 
         if (iv != null) {

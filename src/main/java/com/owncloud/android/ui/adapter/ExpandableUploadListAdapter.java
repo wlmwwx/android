@@ -161,7 +161,6 @@ public class ExpandableUploadListAdapter extends BaseExpandableListAdapter imple
                 Arrays.sort(getItems(), comparator);
             }
         };
-
         mUploadGroups[1] = new UploadGroup(mParentActivity.getString(R.string.uploads_view_group_failed_uploads)) {
             @Override
             public void refresh() {
@@ -169,7 +168,6 @@ public class ExpandableUploadListAdapter extends BaseExpandableListAdapter imple
                 Arrays.sort(getItems(), comparator);
             }
         };
-
         mUploadGroups[2] = new UploadGroup(mParentActivity.getString(R.string.uploads_view_group_finished_uploads)) {
             @Override
             public void refresh() {
