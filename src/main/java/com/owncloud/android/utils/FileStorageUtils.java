@@ -389,7 +389,8 @@ public class FileStorageUtils {
                 if (o1.isDirectory() && o2.isDirectory()) {
                     // Long obj1 = getFolderSize(o1);
                     // return multiplier * obj1.compareTo(getFolderSize(o2));
-                    return o1.getPath().toLowerCase().compareTo(o2.getPath().toLowerCase());
+                    return o1.getPath().toLowerCase(Locale.getDefault()).compareTo(
+                            o2.getPath().toLowerCase(Locale.getDefault()));
                 } else if (o1.isDirectory()) {
                     return -1;
                 } else if (o2.isDirectory()) {
@@ -443,14 +444,15 @@ public class FileStorageUtils {
         Collections.sort(files, new Comparator<File>() {
             public int compare(File o1, File o2) {
                 if (o1.isDirectory() && o2.isDirectory()) {
-                    return multiplier * o1.getPath().toLowerCase().compareTo(o2.getPath().toLowerCase());
+                    return multiplier * o1.getPath().toLowerCase(Locale.getDefault()).compareTo(
+                            o2.getPath().toLowerCase(Locale.getDefault()));
                 } else if (o1.isDirectory()) {
                     return -1;
                 } else if (o2.isDirectory()) {
                     return 1;
                 }
-                return multiplier * new AlphanumComparator().compare(o1.getPath().toLowerCase(),
-                        o2.getPath().toLowerCase());
+                return multiplier * new AlphanumComparator().compare(o1.getPath().toLowerCase(Locale.getDefault()),
+                        o2.getPath().toLowerCase(Locale.getDefault()));
             }
         });
 
@@ -513,7 +515,7 @@ public class FileStorageUtils {
         if (pos >= 0) {
             extension = path.substring(pos + 1);
         }
-        String result = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+        String result = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase(Locale.ROOT));
         return (result != null) ? result : "";
     }
 

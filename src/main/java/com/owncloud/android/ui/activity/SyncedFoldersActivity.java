@@ -74,6 +74,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
@@ -114,11 +115,10 @@ public class SyncedFoldersActivity extends FileActivity implements SyncedFolderA
 
         // setup toolbar
         setupToolbar();
-        CollapsingToolbarLayout mCollapsingToolbarLayout = ((CollapsingToolbarLayout)
-                findViewById(R.id.collapsing_toolbar));
+        CollapsingToolbarLayout mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(this.getString(R.string.drawer_synced_folders));
 
-        mCustomFolderRelativeLayout = (RelativeLayout) findViewById(R.id.custom_folder_toolbar);
+        mCustomFolderRelativeLayout = findViewById(R.id.custom_folder_toolbar);
 
         SharedPreferences appPrefs =
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -170,10 +170,10 @@ public class SyncedFoldersActivity extends FileActivity implements SyncedFolderA
      * sets up the UI elements and loads all media/synced folders.
      */
     private void setupContent() {
-        mRecyclerView = (RecyclerView) findViewById(android.R.id.list);
+        mRecyclerView = findViewById(android.R.id.list);
 
-        mProgress = (LinearLayout) findViewById(android.R.id.progress);
-        mEmpty = (TextView) findViewById(android.R.id.empty);
+        mProgress = findViewById(android.R.id.progress);
+        mEmpty = findViewById(android.R.id.empty);
 
         final int gridWidth = getResources().getInteger(R.integer.media_grid_width);
         boolean lightVersion = getResources().getBoolean(R.bool.syncedFolder_light);
@@ -187,7 +187,7 @@ public class SyncedFoldersActivity extends FileActivity implements SyncedFolderA
         mRecyclerView.setLayoutManager(lm);
         mRecyclerView.setAdapter(mAdapter);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
         if (getResources().getBoolean(R.bool.bottom_toolbar_enabled)) {
             bottomNavigationView.setVisibility(View.VISIBLE);
@@ -280,7 +280,8 @@ public class SyncedFoldersActivity extends FileActivity implements SyncedFolderA
                 } else if (f2 == null) {
                     return 1;
                 } else if (f1.isEnabled() && f2.isEnabled()) {
-                    return f1.getFolderName().toLowerCase().compareTo(f2.getFolderName().toLowerCase());
+                    return f1.getFolderName().toLowerCase(Locale.getDefault()).compareTo(
+                            f2.getFolderName().toLowerCase(Locale.getDefault()));
                 } else if (f1.isEnabled()) {
                     return -1;
                 } else if (f2.isEnabled()) {
@@ -291,14 +292,16 @@ public class SyncedFoldersActivity extends FileActivity implements SyncedFolderA
                     return -1;
                 } else if (f2.getFolderName() == null) {
                     return 1;
-                } else if (PRIORITIZED_FOLDER.equals(f1.getFolderName()) && PRIORITIZED_FOLDER.equals(f2.getFolderName())) {
+                } else if (PRIORITIZED_FOLDER.equals(f1.getFolderName()) &&
+                        PRIORITIZED_FOLDER.equals(f2.getFolderName())) {
                     return 0;
                 } else if (PRIORITIZED_FOLDER.equals(f1.getFolderName())) {
                     return -1;
                 } else if (PRIORITIZED_FOLDER.equals(f2.getFolderName())) {
                     return 1;
                 } else {
-                    return f1.getFolderName().toLowerCase().compareTo(f2.getFolderName().toLowerCase());
+                    return f1.getFolderName().toLowerCase(Locale.getDefault()).compareTo(
+                            f2.getFolderName().toLowerCase(Locale.getDefault()));
                 }
             }
         });

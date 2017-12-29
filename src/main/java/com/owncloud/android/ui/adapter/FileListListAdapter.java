@@ -70,6 +70,7 @@ import com.owncloud.android.utils.ThemeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Vector;
 
 
@@ -217,7 +218,7 @@ public class FileListListAdapter extends BaseAdapter {
         }
 
         if (file != null) {
-            ImageView fileIcon = (ImageView) view.findViewById(R.id.thumbnail);
+            ImageView fileIcon = view.findViewById(R.id.thumbnail);
 
             fileIcon.setTag(file.getFileId());
             TextView fileName;
@@ -225,9 +226,9 @@ public class FileListListAdapter extends BaseAdapter {
 
             switch (viewType) {
                 case LIST_ITEM:
-                    TextView fileSizeV = (TextView) view.findViewById(R.id.file_size);
-                    TextView fileSizeSeparatorV = (TextView) view.findViewById(R.id.file_separator);
-                    TextView lastModV = (TextView) view.findViewById(R.id.last_mod);
+                    TextView fileSizeV = view.findViewById(R.id.file_size);
+                    TextView fileSizeSeparatorV = view.findViewById(R.id.file_separator);
+                    TextView lastModV = view.findViewById(R.id.last_mod);
 
 
                     lastModV.setVisibility(View.VISIBLE);
@@ -240,7 +241,7 @@ public class FileListListAdapter extends BaseAdapter {
 
                 case GRID_ITEM:
                     // filename
-                    fileName = (TextView) view.findViewById(R.id.Filename);
+                    fileName = view.findViewById(R.id.Filename);
                     fileName.setText(name);
 
                     if (OCFileListFragmentInterface.getColumnSize() > showFilenameColumnThreshold
@@ -251,7 +252,7 @@ public class FileListListAdapter extends BaseAdapter {
                 case GRID_IMAGE:
 
                     // local state
-                    ImageView localStateView = (ImageView) view.findViewById(R.id.localFileIndicator);
+                    ImageView localStateView = view.findViewById(R.id.localFileIndicator);
                     localStateView.bringToFront();
                     FileDownloaderBinder downloaderBinder = mTransferServiceGetter.getFileDownloaderBinder();
                     FileUploaderBinder uploaderBinder = mTransferServiceGetter.getFileUploaderBinder();
@@ -294,7 +295,7 @@ public class FileListListAdapter extends BaseAdapter {
                 view.findViewById(R.id.favorite_action).setVisibility(View.GONE);
             }
 
-            ImageView checkBoxV = (ImageView) view.findViewById(R.id.custom_checkbox);
+            ImageView checkBoxV = view.findViewById(R.id.custom_checkbox);
             view.setBackgroundColor(Color.WHITE);
 
             AbsListView parentList = (AbsListView) parent;
@@ -315,10 +316,10 @@ public class FileListListAdapter extends BaseAdapter {
                 checkBoxV.setVisibility(View.GONE);
 
                 if (mHideItemOptions) {
-                    ImageView sharedIconView = (ImageView) view.findViewById(R.id.sharedIcon);
+                    ImageView sharedIconView = view.findViewById(R.id.sharedIcon);
                     sharedIconView.setVisibility(View.GONE);
 
-                    ImageView overflowIndicatorView = (ImageView) view.findViewById(R.id.overflow_menu);
+                    ImageView overflowIndicatorView = view.findViewById(R.id.overflow_menu);
                     overflowIndicatorView.setVisibility(View.GONE);
                 } else {
                     showShareIcon(view, file);
@@ -403,7 +404,7 @@ public class FileListListAdapter extends BaseAdapter {
     }
 
     private void showShareIcon(View view, OCFile file) {
-        ImageView sharedIconV = (ImageView) view.findViewById(R.id.sharedIcon);
+        ImageView sharedIconV = view.findViewById(R.id.sharedIcon);
         sharedIconV.setVisibility(View.VISIBLE);
         if (file.isSharedWithSharee() || file.isSharedWithMe()) {
             sharedIconV.setImageResource(R.drawable.shared_via_users);
@@ -426,7 +427,7 @@ public class FileListListAdapter extends BaseAdapter {
 
     private void showOverflowMenuIcon(View view, OCFile file, ViewType viewType) {
         if (ViewType.LIST_ITEM.equals(viewType)) {
-            ImageView overflowIndicatorV = (ImageView) view.findViewById(R.id.overflow_menu);
+            ImageView overflowIndicatorV = view.findViewById(R.id.overflow_menu);
             overflowIndicatorV.setVisibility(View.VISIBLE);
             overflowIndicatorV.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -439,7 +440,7 @@ public class FileListListAdapter extends BaseAdapter {
 
     private void hideOverflowMenuIcon(View view, ViewType viewType) {
         if (ViewType.LIST_ITEM.equals(viewType)) {
-            ImageView overflowIndicatorV = (ImageView) view.findViewById(R.id.overflow_menu);
+            ImageView overflowIndicatorV = view.findViewById(R.id.overflow_menu);
             overflowIndicatorV.setVisibility(View.GONE);
         }
     }
@@ -692,7 +693,8 @@ public class FileListListAdapter extends BaseAdapter {
                 for (int i = 0; i < mFilesAll.size(); i++) {
                     OCFile currentFile = mFilesAll.get(i);
                     if (currentFile.getParentRemotePath().equals(currentDirectory.getRemotePath()) &&
-                            currentFile.getFileName().toLowerCase().contains(constraint.toString().toLowerCase()) &&
+                            currentFile.getFileName().toLowerCase(Locale.getDefault()).contains(
+                                    constraint.toString().toLowerCase(Locale.getDefault())) && 
                             !filteredFiles.contains(currentFile)) {
                         filteredFiles.add(currentFile);
                     }
