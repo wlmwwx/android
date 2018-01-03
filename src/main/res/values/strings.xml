@@ -727,4 +727,6 @@
     <string name="send">Send</string>
     <string name="share">Share</string>
     <string name="link">Link</string>
+    <string name="userinfo_no_info_headline">No info</string>
+    <string name="userinfo_no_info_text">No user info available. You can add informations on your personal site.</string>
 </resources>
